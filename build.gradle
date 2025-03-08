@@ -1,0 +1,56 @@
+plugins { 
+    id 'java-library'   
+    id 'org.jetbrains.kotlin.jvm' version '2.1.10' 
+    id 'maven-publish'   
+    id 'com.diffplug.spotless' version '6.25.0'
+    id 'org.jlleitschuh.gradle.ktlint' version '12.1.0'       
+}
+
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+// Apply a specific Java toolchain to ease working on different environments.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+spotless {
+    java {
+        target "**/*.java"		  
+        googleJavaFormat()
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "21"
+    }
+}
+	
+dependencies {
+    implementation 'com.github.KodTik-Innovations:kotlinc:2.1.10'
+    implementation 'com.google.guava:guava:33.3.1-jre' 
+    implementation 'com.google.googlejavaformat:google-java-format:1.25.2'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'org.kodtik.ide'
+            artifactId = 'ktfmt'
+            version = '0.54' 
+                                
+            from components.java
+        }
+    }
+}  
