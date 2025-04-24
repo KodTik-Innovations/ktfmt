@@ -39,7 +39,7 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 	
 dependencies {
     implementation 'com.github.KodTik-Innovations:kotlinc:main-SNAPSHOT'
-    implementation 'com.google.guava:guava:33.3.1-jre' 
+    implementation 'com.google.guava:guava:33.4.8-jre' 
     implementation 'com.google.googlejavaformat:google-java-format:1.25.2'
 }
 
